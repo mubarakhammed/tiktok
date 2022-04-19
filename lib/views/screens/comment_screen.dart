@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:tiktok_clone/constants.dart';
 import 'package:tiktok_clone/controllers/comment_controller.dart';
 import 'package:timeago/timeago.dart' as tago;
 
@@ -35,7 +36,7 @@ class CommentScreen extends StatelessWidget {
                       ),
                       title: Row(children: [
                         Text(
-                          comment.username,
+                          "${comment.username}  ",
                           style: TextStyle(
                               fontSize: 20,
                               color: Colors.red,
@@ -52,7 +53,7 @@ class CommentScreen extends StatelessWidget {
                       subtitle: Row(
                         children: [
                           Text(
-                            tago.format(comment.datePublished),
+                            tago.format(comment.datePublished.toDate()),
                             style: TextStyle(fontSize: 12, color: Colors.white),
                           ),
                           SizedBox(
@@ -65,10 +66,13 @@ class CommentScreen extends StatelessWidget {
                         ],
                       ),
                       trailing: InkWell(
-                        onTap: () {},
+                        onTap: () => commentController.likeComment(comment.id),
                         child: Icon(
                           Icons.favorite,
-                          color: Colors.red,
+                          color:
+                              comment.likes.contains(authController.user!.uid)
+                                  ? Colors.red
+                                  : Colors.white,
                           size: 25,
                         ),
                       ),
