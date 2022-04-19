@@ -14,105 +14,114 @@ class SignupScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'TikTok Clone',
-              style: TextStyle(
-                  fontSize: 35,
-                  color: buttonColor,
-                  fontWeight: FontWeight.w900),
-            ),
-            Text(
-              'Register',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
-            ),
-            Stack(
-              children: [
-                const CircleAvatar(
-                  radius: 64,
-                  backgroundImage:
-                      NetworkImage('http://via.placeholder.com/350x150'),
-                  backgroundColor: Colors.black,
-                ),
-                Positioned(
-                    bottom: -10,
-                    left: 80,
-                    child: IconButton(
-                      icon: Icon(Icons.add_a_photo),
-                      onPressed: () {},
-                    ))
-              ],
-            ),
-            SizedBox(height: 15),
-            Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                child: TextInputField(
-                  controller: _usernameController,
-                  labelText: 'Username',
-                  icon: Icons.person,
-                )),
-            SizedBox(
-              height: 15,
-            ),
-            Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                child: TextInputField(
-                  controller: _emailController,
-                  labelText: 'Email',
-                  icon: Icons.email,
-                )),
-            SizedBox(
-              height: 15,
-            ),
-            Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                child: TextInputField(
-                  controller: _passwordController,
-                  labelText: 'Password',
-                  icon: Icons.lock,
-                  isObscured: true,
-                )),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width - 40,
-              height: 50,
-              decoration: BoxDecoration(
-                  color: buttonColor,
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
-              child: InkWell(
-                onTap: () {},
-                child: Center(
-                    child: Text(
-                  'Login',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                )),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'TikTok Clone',
+                style: TextStyle(
+                    fontSize: 35,
+                    color: buttonColor,
+                    fontWeight: FontWeight.w900),
               ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Already have an account? ",
-                  style: TextStyle(fontSize: 20),
+              Text(
+                'Register',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Stack(
+                children: [
+                  const CircleAvatar(
+                    radius: 64,
+                    backgroundImage: NetworkImage(
+                        'http://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png'),
+                    backgroundColor: Colors.black,
+                  ),
+                  Positioned(
+                      bottom: -10,
+                      left: 80,
+                      child: IconButton(
+                        icon: Icon(Icons.add_a_photo),
+                        onPressed: () => authController.pickImage(),
+                      ))
+                ],
+              ),
+              SizedBox(height: 15),
+              Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  child: TextInputField(
+                    controller: _usernameController,
+                    labelText: 'Username',
+                    icon: Icons.person,
+                  )),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  child: TextInputField(
+                    controller: _emailController,
+                    labelText: 'Email',
+                    icon: Icons.email,
+                  )),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  child: TextInputField(
+                    controller: _passwordController,
+                    labelText: 'Password',
+                    icon: Icons.lock,
+                    isObscured: true,
+                  )),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width - 40,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: buttonColor,
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                child: InkWell(
+                  onTap: () => authController.registerUser(
+                      _usernameController.text,
+                      _emailController.text,
+                      _passwordController.text,
+                      authController.ProfilePhoto),
+                  child: Center(
+                      child: Text(
+                    'Register',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                  )),
                 ),
-                InkWell(
-                  onTap: () {},
-                  child: Text('Login',
-                      style: TextStyle(fontSize: 20, color: buttonColor)),
-                )
-              ],
-            )
-          ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Already have an account? ",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: Text('Login',
+                        style: TextStyle(fontSize: 20, color: buttonColor)),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
